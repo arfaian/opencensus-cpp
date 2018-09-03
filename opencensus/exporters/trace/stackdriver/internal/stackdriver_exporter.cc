@@ -266,8 +266,6 @@ void Handler::Export(
   ConvertSpans(spans, project_id_, &request);
   ::google::protobuf::Empty response;
   grpc::ClientContext context;
-  context.set_deadline(
-      ConvertToTimespec(absl::Now() + absl::Milliseconds(3000)));
   grpc::Status status = stub_->BatchWriteSpans(&context, request, &response);
   if (!status.ok()) {
     std::cerr << "BatchWriteSpans failed: "
